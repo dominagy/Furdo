@@ -17,7 +17,7 @@ export default class furdozokController implements Controller {
         this.router.get(`${this.path}:furdozoid`, authMiddleware, this.getFurdozo);
         this.router.get(`${this.path}/:offset/:limit/:order/:sort/:keyword?`, this.getPaginatedFurdozok);
         this.router.get(`${this.path}:helyiseg`, authMiddleware, this.getHelyiseg);
-        this.router.post(this.path,[authMiddleware, validationMiddleware(CreateFurfozokDto)], this.create);
+        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateFurfozokDto)], this.create);
         this.router.patch(`${this.path}:id`, this.modifyPATCH);
         this.router.put(`${this.path}:id`, this.modifyPUT);
         this.router.delete(`${this.path}:id`, this.delete);
@@ -65,7 +65,7 @@ export default class furdozokController implements Controller {
     private getFurdozo = async (req: Request, res: Response) => {
         try {
             const id = req.params.furdozoid;
-            const document = await this.furdozokM.find({furdozoid: id});
+            const document = await this.furdozokM.find({ furdozoid: id });
             if (document) {
                 res.send(document);
             } else {
@@ -75,11 +75,11 @@ export default class furdozokController implements Controller {
             res.status(400).send({ message: error.message });
         }
     };
-    
+
     private getHelyiseg = async (req: Request, res: Response) => {
         try {
             const id = req.params.helyiseg;
-            const document = await this.furdozokM.find({helyiseg: id});
+            const document = await this.furdozokM.find({ helyiseg: id });
             if (document) {
                 res.send(document);
             } else {
